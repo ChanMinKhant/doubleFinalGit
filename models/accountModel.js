@@ -11,16 +11,22 @@ const accountSchema = new mongoose.Schema(
       validate: [
         {
           validator: function (email) {
-            return email.endsWith('@ucspyay.edu.mm');
+            //for all valid email address
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
           },
-          message: 'Please enter a valid UCSPYAY email address',
         },
-        {
-          validator: function (email) {
-            return !/\s/.test(email);
-          },
-          message: 'Email address should not contain spaces',
-        },
+        // {
+        //   validator: function (email) {
+        //     return email.endsWith('@ucspyay.edu.mm');
+        //   },
+        //   message: 'Please enter a valid UCSPYAY email address',
+        // },
+        // {
+        //   validator: function (email) {
+        //     return !/\s/.test(email);
+        //   },
+        //   message: 'Email address should not contain spaces',
+        // },
       ],
     },
     password: {

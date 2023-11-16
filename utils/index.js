@@ -111,7 +111,9 @@ exports.sendEmail = async (option) => {
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USERNAME,
+    from: `"${process.env.EMAIL_FROM_NAME || 'website Name'}" <${
+      process.env.EMAIL_FROM
+    }>`, // sender address
     to: option.email,
     subject: option.subject,
     html: option.message,

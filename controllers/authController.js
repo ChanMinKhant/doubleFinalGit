@@ -42,9 +42,12 @@ exports.register = asyncErrorHandler(async (req, res, next) => {
 
   //sent verification message here.
   const token = uuidv4();
-  const link = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/auth/verifyemail/${token}`; //i will change frontend url later
+  // const link = `${req.protocol}://${req.get(
+  //   'host'
+  // )}/api/v1/auth/verifyemail/${token}`; //i will change frontend url later
+  const link = `${
+    process.env.FRONTEND_URL || 'http://localhost:5173'
+  }/verify-email/${token}}`;
   const message = verifyEmailTemplate(link);
   const hashToken = crypto.createHash('sha256').update(token).digest('hex');
   const verification = await Verification.create({
