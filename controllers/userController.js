@@ -54,34 +54,36 @@ exports.updateProfile = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
-// exports.getProfile = asyncErrorHandler(async (req, res, next) => {
-//   //i can add some user control setting here. eg., user can choose to show their profile to public or not
-//   // and show the followers or not
-//   const { username } = req.params;
-//   const profile = await Profile.findOne({ username }).populate(
-//     'account_id',
-//     'id'
-//   );
-//   if (!profile) {
-//     const error = new CustomError('Profile not found', 404);
-//     return next(error);
-//   }
-//   let isFollowing = false;
-//   const isOwnProfile = profile.account_id.id === req.account_id;
-//   if (!isOwnProfile) {
-//     //if not own profile, then check if the user is following the profile
-//     const userProfile = await Profile.findOne({ account_id: req.account_id });
-//     isFollowing = userProfile.following.includes(profile.id);
-//   }
-//   res.status(200).json({
-//     success: true,
-//     profile: {
-//       ...profile.toObject(),
-//       isOwnProfile,
-//       isFollowing,
-//     },
-//   });
-// });
+{
+  // exports.getProfile = asyncErrorHandler(async (req, res, next) => {
+  //   //i can add some user control setting here. eg., user can choose to show their profile to public or not
+  //   // and show the followers or not
+  //   const { username } = req.params;
+  //   const profile = await Profile.findOne({ username }).populate(
+  //     'account_id',
+  //     'id'
+  //   );
+  //   if (!profile) {
+  //     const error = new CustomError('Profile not found', 404);
+  //     return next(error);
+  //   }
+  //   let isFollowing = false;
+  //   const isOwnProfile = profile.account_id.id === req.account_id;
+  //   if (!isOwnProfile) {
+  //     //if not own profile, then check if the user is following the profile
+  //     const userProfile = await Profile.findOne({ account_id: req.account_id });
+  //     isFollowing = userProfile.following.includes(profile.id);
+  //   }
+  //   res.status(200).json({
+  //     success: true,
+  //     profile: {
+  //       ...profile.toObject(),
+  //       isOwnProfile,
+  //       isFollowing,
+  //     },
+  //   });
+  // });
+}
 
 exports.getProfile = asyncErrorHandler(async (req, res, next) => {
   const { username } = req.params;
@@ -125,22 +127,26 @@ exports.getProfile = asyncErrorHandler(async (req, res, next) => {
       isOwnProfile,
       isFollowing,
       posts,
+      LikeCount: profile.likes.length,
+      commentCount: profile.comments.length,
     },
   });
 });
 
-// exports.getOwnProfile = asyncErrorHandler(async (req, res, next) => {
-//   const profile = await Profile.findOne({ account_id: req.account_id });
-//   if (!profile) {
-//     const error = new CustomError('Profile not found', 404);
-//     return next(error);
-//   }
-//   res.status(200).json({
-//     success: true,
-//     profile,
-//     isOwnProfile: true,
-//   });
-// });
+{
+  // exports.getOwnProfile = asyncErrorHandler(async (req, res, next) => {
+  //   const profile = await Profile.findOne({ account_id: req.account_id });
+  //   if (!profile) {
+  //     const error = new CustomError('Profile not found', 404);
+  //     return next(error);
+  //   }
+  //   res.status(200).json({
+  //     success: true,
+  //     profile,
+  //     isOwnProfile: true,
+  //   });
+  // });
+}
 
 exports.followUser = asyncErrorHandler(async (req, res, next) => {
   const { username } = req.params;

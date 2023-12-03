@@ -1,5 +1,5 @@
 const multer = require('multer');
-const customError = require('../utils/customError');
+const CustomError = require('../utils/CustomError');
 const path = require('path');
 const fs = require('fs');
 // uuidv4 = require('uuid').v4;
@@ -41,20 +41,20 @@ const errorChecker = (err, next) => {
   if (err) {
     if (err instanceof multer.MulterError) {
       if (err.code === 'LIMIT_FILE_SIZE') {
-        const err = new customError('File size too large.', 400);
+        const err = new CustomError('File size too large.', 400);
         next(err);
       } else if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-        const err = new customError('Too many files to upload.', 400);
+        const err = new CustomError('Too many files to upload.', 400);
         next(err);
       } else {
-        const err = new customError(
+        const err = new CustomError(
           'An error occurred during file upload.',
           500
         );
         next(err);
       }
     } else {
-      const err = new customError('An error occurred during file upload.', 500);
+      const err = new CustomError('An error occurred during file upload.', 500);
       next(err);
     }
   }

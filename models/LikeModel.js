@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const likeSchema = new mongoose.Schema(
   {
-    user: {
+    account_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'User is required for a like'],

@@ -41,7 +41,8 @@ exports.register = asyncErrorHandler(async (req, res, next) => {
   }
 
   //sent verification message here.
-  const token = uuidv4();
+  // delete - from token and join it.
+  const token = uuidv4().replace(/-/g, ''); //here g mean global
   // const link = `${req.protocol}://${req.get(
   //   'host'
   // )}/api/v1/auth/verifyemail/${token}`; //i will change frontend url later
@@ -54,7 +55,7 @@ exports.register = asyncErrorHandler(async (req, res, next) => {
     email,
     token: hashToken,
     createdAt: Date.now(),
-    expiresAt: Date.now() + 1000 * 60 * 10, // 6 seconds
+    expiresAt: Date.now() + 1000 * 60 * 10, // 10 minutes
   });
   if (!verification) {
     const err = new CustomError('Something went wrong', 500);

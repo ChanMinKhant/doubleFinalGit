@@ -17,7 +17,7 @@ const verificationSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 60, // this is 10 seconds in seconds
+    // expires: 60, //
   },
 });
 
