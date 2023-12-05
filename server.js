@@ -7,7 +7,9 @@ const { dbConnect } = require('./config/dbConnect');
 const cors = require('cors');
 dbConnect();
 console.log(process.env.EMAIL_SERVICE);
-app.use(cors());
+
+app.use(cors({ origin: true, credentials: true }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 

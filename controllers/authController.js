@@ -48,7 +48,7 @@ exports.register = asyncErrorHandler(async (req, res, next) => {
   // )}/api/v1/auth/verifyemail/${token}`; //i will change frontend url later
   const link = `${
     process.env.FRONTEND_URL || 'http://localhost:5173'
-  }/verify-email/${token}}`;
+  }/verify-email/${token}`;
   const message = verifyEmailTemplate(link);
   const hashToken = crypto.createHash('sha256').update(token).digest('hex');
   const verification = await Verification.create({
@@ -92,7 +92,6 @@ exports.verifyEmail = asyncErrorHandler(async (req, res, next) => {
     return next(err);
   }
   const account = await Account.findOne({ email: verification.email });
-  console.log(account);
   if (!account) {
     const err = new CustomError('Account is not found', 400);
     return next(err);
@@ -102,7 +101,6 @@ exports.verifyEmail = asyncErrorHandler(async (req, res, next) => {
     return next(err);
   }
   if (verification.expiresAt < Date.now()) {
-    console.log('here');
     await verification.deleteOne();
     await account.deleteOne();
     const err = new CustomError('Token is invalid or has expired', 400);
