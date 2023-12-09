@@ -1,6 +1,6 @@
 // like to posts and comments
 const Post = require('../models/postModel');
-const Like = require('../models/likeModel');
+const Like = require('../models/LikeModel');
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
 const CustomError = require('../utils/CustomError');
 const Profile = require('../models/profileModel');
